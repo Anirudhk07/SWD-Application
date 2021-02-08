@@ -1,7 +1,8 @@
-package com.example.swd_application
+package com.example.swd_application.Authentication.Client
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.swd_application.R
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

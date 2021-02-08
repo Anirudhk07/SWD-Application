@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminHomeActivity" />
-        <activity android:name=".AdminLoginActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Authentication.Admin.AdminHomeActivity" />
+        <activity android:name=".Authentication.Admin.AdminLoginActivity" />
+        <activity android:name=".Authentication.Client.HomeActivity" />
+        <activity android:name=".Authentication.Client.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

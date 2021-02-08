@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BAEAC8"
-    tools:context=".AdminLoginActivity">
+    tools:context=".Authentication.Admin.AdminLoginActivity">
 
     <TextView
         android:id="@+id/tv_admin_login"
@@ -50,7 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="REGISTERED EMAIL ID"
-                android:text="" />
+                android:text=""
+                android:inputType="textEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="PASSWORD"
-                android:text="" />
+                android:text=""
+                android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
