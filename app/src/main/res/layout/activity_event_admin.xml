@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAEAC8"
+    tools:context=".Authentication.Admin.AdminLoginActivity">
+
+    <TextView
+        android:id="@+id/tv_admin_add_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:text="Add events"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="serif"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/tv_admin_add_event"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_admin_add_event"
+        android:layout_margin="24dp"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <EditText
+            android:id="@+id/et_admin_event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="EVENT NAME"
+            android:text=""
+            android:autofillHints="EVENT NAME"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+        <EditText
+            android:id="@+id/et_admin_event_discription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="EVENT DESCRIPTION"
+            android:text=""
+            android:autofillHints="EVENT DESCRIPTION"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/btnChoose"
+                android:text="Choose"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnUpload"
+                android:text="Upload"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:contentDescription="Selected image" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Activity \nDate"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_date_picker_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pick\ndate"
+                android:textAllCaps="true"
+                android:layout_margin="5dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_start_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Selected Date and Time"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="25dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Activity   \nDate"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_date_picker_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pick\ndate"
+                android:textAllCaps="true"
+                android:layout_margin="5dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_end_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Selected Date and Time"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="25dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:paddingEnd="5dp">
+
+                <EditText
+                    android:id="@+id/et_event_name_head_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="HEAD NAME 1"
+                    android:text=""
+                    android:autofillHints="HEAD NAME 1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_weight="1"
+                android:paddingStart="5dp">
+
+                <EditText
+                    android:id="@+id/et_event_name_head_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="HEAD NAME 2"
+                    android:text=""
+                    android:inputType="textEmailAddress"
+                    android:autofillHints="HEAD NAME 2"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:id="@+id/et_event_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="LINK"
+                android:inputType="textWebEmailAddress"
+                android:autofillHints="LINK"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_add_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Event"
+            android:inputType=""
+            android:layout_marginTop="15dp"/>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

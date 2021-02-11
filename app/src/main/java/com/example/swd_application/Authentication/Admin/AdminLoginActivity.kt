@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.swd_application.Admin.EventAdminActivity
 import com.example.swd_application.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -18,6 +19,15 @@ class AdminLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_login)
+
+        /*********************************************************************************/
+        /**/val btn_admin_login_skip = findViewById<Button>(R.id.btn_admin_login_skip)/**/
+        /**/btn_admin_login_skip.setOnClickListener {                                /**/
+        /**/val intent = Intent(this,AdminHomeActivity::class.java)   /**/
+        /**/startActivity(intent)                                                  /**/
+        /**/}                                                                     /**/
+        /***************************************************************************/
+
         email = findViewById(R.id.tv_admin_login_email_id)
         password = findViewById(R.id.tv_admin_login_password)
         login = findViewById(R.id.btn_admin_login)
