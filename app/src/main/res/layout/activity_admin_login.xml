@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAEAC8"
+    tools:context=".Authentication.Admin.AdminLoginActivity">
+
+    <TextView
+        android:id="@+id/tv_admin_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="Admin Team Login"
+        android:textAllCaps="true"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:fontFamily="serif"/>
+
+
+    <ImageView
+        android:id="@+id/iv_admin_login_swd_logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tv_admin_login"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="45dp"
+        android:contentDescription="SWD LOGO"
+        android:src="@drawable/swd_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_admin_login_swd_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="24dp"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_admin_login_swd_logo">
+
+            <EditText
+                android:id="@+id/tv_admin_login_email_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="REGISTERED EMAIL ID"
+                android:text=""
+                android:inputType="textEmailAddress"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_admin_login_swd_logo">
+
+            <EditText
+                android:id="@+id/tv_admin_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="PASSWORD"
+                android:text=""
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_admin_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="18dp"
+            android:background="#1F924D"
+            android:text="Login" />
+    </LinearLayout>
+</RelativeLayout>

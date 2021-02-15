@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAEAC8"
+    tools:context=".Authentication.Client.LoginActivity">
+
+    <ImageView
+        android:id="@+id/iv_vit_logo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/vit_logo" />
+
+    <ImageView
+        android:id="@+id/iv_swd_logo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/swd_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:fontFamily="serif"
+        android:text="Help one Inspire many"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/iv_login_onboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_image" />
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-168dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
+        android:padding="20dp" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:alpha="0.8"
+        android:background="#1F924D"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Admin Login"
+        android:textAlignment="center"
+        android:textAllCaps="true" />
+
+</RelativeLayout>
