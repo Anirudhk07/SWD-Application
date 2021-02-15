@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.swd_application.Authentication.Admin.AdminLoginActivity
 import com.example.swd_application.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -18,10 +16,9 @@ import com.google.android.gms.tasks.Task
 
 
 class LoginActivity : AppCompatActivity() {
-    private var google_sign: SignInButton? = null
-    private var RC_SIGN_IN = 0
-    private var mGoogleSignInClient: GoogleSignInClient? = null
-
+    var google_sign: SignInButton? = null
+    var RC_SIGN_IN = 0
+    var mGoogleSignInClient: GoogleSignInClient? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -36,13 +33,6 @@ class LoginActivity : AppCompatActivity() {
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        val button = findViewById<Button>(R.id.btn_login)
-
-        button.setOnClickListener {
-            val intent = Intent(this, AdminLoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun signIn() {
