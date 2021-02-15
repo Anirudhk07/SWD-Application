@@ -42,7 +42,7 @@
         android:id="@+id/google_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_login"
+        android:layout_below="@+id/btn_admin_login_login"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="-168dp"
@@ -51,7 +51,7 @@
         android:padding="20dp" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_admin_login_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

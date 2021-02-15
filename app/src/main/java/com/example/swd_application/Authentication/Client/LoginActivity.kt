@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        val button = findViewById<Button>(R.id.btn_login)
+        val button = findViewById<Button>(R.id.btn_admin_login_login)
 
         button.setOnClickListener {
             val intent = Intent(this, AdminLoginActivity::class.java)
