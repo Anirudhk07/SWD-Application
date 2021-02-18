@@ -12,7 +12,7 @@ class AdminHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home)
 
-        val skip: Button = findViewById<Button>(R.id.btn_skip)
+        val skip: Button = findViewById(R.id.btn_skip)
         skip.setOnClickListener {
             val intent = Intent(this@AdminHomeActivity, EventAdminActivity::class.java)
             startActivity(intent)

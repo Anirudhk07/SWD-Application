@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.swd_application.Admin.EventAdminActivity
 import com.example.swd_application.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -29,6 +30,11 @@ class AdminLoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Empty Credentials!", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(txt_email, txt_password)
+            }
+            val skip: Button = findViewById(R.id.btn_skip)
+            skip.setOnClickListener {
+                val intent = Intent(this, AdminHomeActivity::class.java)
+                startActivity(intent)
             }
         }
     }
