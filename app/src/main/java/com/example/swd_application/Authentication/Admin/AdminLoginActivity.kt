@@ -27,15 +27,15 @@ class AdminLoginActivity : AppCompatActivity() {
             val txt_email = email?.text.toString()
             val txt_password = password?.text.toString()
             if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-                Toast.makeText(this, "Empty Credentials!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AdminLoginActivity, "Empty Credentials!", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(txt_email, txt_password)
             }
-            val skip: Button = findViewById(R.id.btn_skip)
-            skip.setOnClickListener {
-                val intent = Intent(this, AdminHomeActivity::class.java)
-                startActivity(intent)
-            }
+        }
+        val skip: Button = findViewById(R.id.btn_skip)
+        skip.setOnClickListener {
+            val intent = Intent(this@AdminLoginActivity, AdminHomeActivity::class.java)
+            startActivity(intent)
         }
     }
 

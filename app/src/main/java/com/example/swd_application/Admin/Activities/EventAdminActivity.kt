@@ -32,7 +32,7 @@ class EventAdminActivity : AppCompatActivity() {
 
         const val COLLECTION_PATH = "EVENTS"
         const val ROOT_EVENT_IMAGE_REF = "Events-Images"
-        const val IMAGE_URL_FIELD = "eventImageUrl"
+        const val IMAGE_URL_FIELD = "profile.eventImageUrl"
     }
 
     private lateinit var et_admin_event_name: TextView
@@ -267,7 +267,7 @@ class EventAdminActivity : AppCompatActivity() {
 
     private fun updateEventDataWithImageUrl(eventId: String,fieldName:String,downloadUri:Uri){
         eventsDb.collection(COLLECTION_PATH).document(eventId)
-            .update(fieldName, downloadUri.toString())
+            .update(mapOf(fieldName to downloadUri.toString()))
             .addOnSuccessListener {
                 Log.d(
                     TAG,

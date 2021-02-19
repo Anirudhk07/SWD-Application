@@ -8,7 +8,7 @@ data class EventProfile(
     val EventDescription: String,
     val EventEndDate: String?,
     val EventFlagship: Boolean,
-    val EventHeads: List<String>?,
+    val EventHeads: List<String>,
     val EventImageUrl: String?,
     val EventLinkUrl: String,
     val EventName: String,
