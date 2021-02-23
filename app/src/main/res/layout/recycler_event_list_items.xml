@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="20dp"
+    android:layout_marginHorizontal="20dp"
+    app:cardCornerRadius="20dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardElevation="15dp"
+    app:cardMaxElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_recycler_event_list_event_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Event-Name"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_recycler_event_list_event_start_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <TextView
+            android:id="@+id/tv_recycler_event_list_event_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:text="Start Date : "
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_recycler_event_list_event_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recycler_event_list_event_name" />
+
+        <TextView
+            android:id="@+id/tv_recycler_event_list_event_start_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="00-00-0000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_recycler_event_list_event_start_date"
+            app:layout_constraintStart_toEndOf="@+id/tv_recycler_event_list_event_start_date"
+            app:layout_constraintTop_toTopOf="@+id/tv_recycler_event_list_event_start_date"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tv_recycler_event_list_event_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="End Date : "
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_recycler_event_list_event_end_date_value"
+            app:layout_constraintEnd_toStartOf="@+id/tv_recycler_event_list_event_end_date_value"
+            app:layout_constraintTop_toTopOf="@+id/tv_recycler_event_list_event_end_date_value"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tv_recycler_event_list_event_end_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="00-00-0000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_recycler_event_list_event_start_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_recycler_event_list_event_start_date" />
+
+        <ImageView
+            android:id="@+id/iv_recycler_event_list_event_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toTopOf="@+id/tv_recycler_event_list_event_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recycler_event_list_event_start_date"
+            tools:srcCompat="@tools:sample/avatars[1]" />
+
+        <TextView
+            android:id="@+id/tv_recycler_event_list_event_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="Click on this card to know more about the event"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_recycler_event_list_event_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
