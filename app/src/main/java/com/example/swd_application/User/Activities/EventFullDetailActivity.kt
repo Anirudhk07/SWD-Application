@@ -4,8 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
@@ -53,12 +55,15 @@ class EventFullDetailActivity : AppCompatActivity() {
         }
 
         tvEventFormLink.setOnClickListener {
-            // TODO:: Tanvi Continue Your Work from Here
-            // TODO:: Uncomment the code and the intent just change the name of your web view Activitu
-//            val intent = Intent(this,WebViewActivity::class.java)
-//            val eventFormUrl: String? = eventProfileData?.eventLinkUrl
-//            intent.putExtra(FORM_URL,eventFormUrl)
-//            startActivity(intent)
+
+            val intent = Intent(this, EventFormWebViewActivity::class.java)
+            val eventFormUrl: String? = eventProfileData?.eventLinkUrl
+            if (URLUtil.isValidUrl(eventFormUrl)) {
+                intent.putExtra("url", eventFormUrl)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Invalid URL!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
     
