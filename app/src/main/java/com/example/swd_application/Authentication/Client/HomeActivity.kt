@@ -1,10 +1,10 @@
+
 package com.example.swd_application.Authentication.Client
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.swd_application.Authentication.Admin.AdminLoginActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.swd_application.R
 
 class HomeActivity : AppCompatActivity() {
@@ -20,4 +20,5 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 }
