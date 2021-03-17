@@ -5,11 +5,12 @@ class EventModelUser {
     lateinit var profile: EventProfileUser
     lateinit var nonProfile: EventNonProfileUser
 
-    constructor(){
+    // Required for Firebase
+    constructor() {
 
     }
 
-    constructor(nonProfile: EventNonProfileUser, profile: EventProfileUser):this(){
+    constructor(nonProfile: EventNonProfileUser, profile: EventProfileUser) : this() {
         this.nonProfile = nonProfile
         this.profile = profile
     }

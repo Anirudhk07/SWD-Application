@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 
 class EventProfileUser : Parcelable {
-    var eventConductedYear:Int = -1
+    var eventConductedYear: Int = -1
     lateinit var eventDescription: String
     lateinit var eventEndDate: String
     var eventFlagship: Boolean = false
@@ -13,9 +13,11 @@ class EventProfileUser : Parcelable {
     var eventImageUrl: String? = null
     var eventLinkUrl: String? = null
     lateinit var eventName: String
+    var eventNumberOfSeats: Int = 0
     lateinit var eventStartDate: String
 
-    constructor(){
+    // Required for Firebase
+    constructor() {
 
     }
 
@@ -31,7 +33,17 @@ class EventProfileUser : Parcelable {
         eventStartDate = parcel.readString().toString()
     }
 
-    constructor(eventConductedYear:Int,eventDescription: String,eventEndDate: String,eventFlagship: Boolean,eventHeads: List<String>,eventImageUrl: String?,eventLinkUrl: String?,eventName: String,eventStartDate: String):this(){
+    constructor(
+        eventConductedYear: Int,
+        eventDescription: String,
+        eventEndDate: String,
+        eventFlagship: Boolean,
+        eventHeads: List<String>,
+        eventImageUrl: String?,
+        eventLinkUrl: String?,
+        eventName: String,
+        eventStartDate: String
+    ) : this() {
         this.eventConductedYear = eventConductedYear
         this.eventDescription = eventDescription
         this.eventEndDate = eventEndDate

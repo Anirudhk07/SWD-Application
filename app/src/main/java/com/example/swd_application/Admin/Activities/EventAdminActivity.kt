@@ -42,6 +42,7 @@ class EventAdminActivity : AppCompatActivity() {
     private lateinit var et_event_name_head_1: TextView
     private lateinit var et_event_name_head_2: TextView
     private lateinit var et_event_link: TextView
+    private lateinit var et_event_number_of_seats_value: TextView
 
     private lateinit var btn_date_picker_start: Button
     private lateinit var tv_start_event: TextView
@@ -73,6 +74,7 @@ class EventAdminActivity : AppCompatActivity() {
 
         et_admin_event_name = findViewById<TextView>(R.id.et_admin_event_name)
         et_admin_event_description = findViewById<TextView>(R.id.et_admin_event_description)
+        et_event_number_of_seats_value = findViewById<TextView>(R.id.et_admin_event_number_of_seats_value)
 
         btnChoose = findViewById<Button>(R.id.btnChoose)
         imageView = findViewById<ImageView>(R.id.iv_admin_event_image)
@@ -200,7 +202,7 @@ class EventAdminActivity : AppCompatActivity() {
         val calender: Calendar = Calendar.getInstance()
         val year: Int = calender.get(Calendar.YEAR)
         val eventProfile: EventProfile = EventProfile(
-            EventConductedYear = year,
+            EventConductedYear = year.toString(),
             EventDescription = et_admin_event_description.text.toString(),
             EventEndDate = endDate,
             EventFlagship = isEventFlagship,
@@ -211,6 +213,8 @@ class EventAdminActivity : AppCompatActivity() {
             EventImageUrl = null,
             EventLinkUrl = et_event_link.text.toString(),
             EventName = et_admin_event_name.text.toString().trim().toUpperCase(Locale.ROOT),
+            EventTotalNumberOfSeats = et_event_number_of_seats_value.text.toString().toInt(),
+            EventNumberOfSeatsFilled = 0,
             EventStartDate = startDate
         )
 

@@ -1,7 +1,7 @@
 package com.example.swd_application.Admin.EventModels
 
 data class EventProfile(
-    val EventConductedYear:Int,
+    val EventConductedYear: String,
     val EventDescription: String,
     val EventEndDate: String?,
     val EventFlagship: Boolean,
@@ -9,6 +9,8 @@ data class EventProfile(
     val EventImageUrl: String?,
     val EventLinkUrl: String,
     val EventName: String,
+    val EventTotalNumberOfSeats: Int,
+    val EventNumberOfSeatsFilled: Int,
     val EventStartDate: String?
 )
 
