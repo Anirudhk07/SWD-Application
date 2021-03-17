@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 
 class EventProfileUser : Parcelable {
-    var eventConductedYear: Int = -1
+    lateinit var eventConductedYear: String
     lateinit var eventDescription: String
     lateinit var eventEndDate: String
     var eventFlagship: Boolean = false
@@ -13,8 +13,9 @@ class EventProfileUser : Parcelable {
     var eventImageUrl: String? = null
     var eventLinkUrl: String? = null
     lateinit var eventName: String
-    var eventNumberOfSeats: Int = 0
+    var eventNumberOfSeatsFilled: Int = 0
     lateinit var eventStartDate: String
+    var eventTotalNumberOfSeats: Int = 0
 
     // Required for Firebase
     constructor() {
@@ -22,7 +23,7 @@ class EventProfileUser : Parcelable {
     }
 
     constructor(parcel: Parcel) : this() {
-        eventConductedYear = parcel.readInt()
+        eventConductedYear = parcel.readString().toString()
         eventDescription = parcel.readString().toString()
         eventEndDate = parcel.readString().toString()
         eventFlagship = parcel.readByte() != 0.toByte()
@@ -30,11 +31,13 @@ class EventProfileUser : Parcelable {
         eventImageUrl = parcel.readString()
         eventLinkUrl = parcel.readString()
         eventName = parcel.readString().toString()
+        eventNumberOfSeatsFilled = parcel.readInt()
         eventStartDate = parcel.readString().toString()
+        eventTotalNumberOfSeats = parcel.readInt()
     }
 
     constructor(
-        eventConductedYear: Int,
+        eventConductedYear: String,
         eventDescription: String,
         eventEndDate: String,
         eventFlagship: Boolean,
@@ -42,7 +45,9 @@ class EventProfileUser : Parcelable {
         eventImageUrl: String?,
         eventLinkUrl: String?,
         eventName: String,
-        eventStartDate: String
+        eventNumberOfSeatsFilled: Int,
+        eventStartDate: String,
+        eventTotalNumberOfSeats: Int
     ) : this() {
         this.eventConductedYear = eventConductedYear
         this.eventDescription = eventDescription
@@ -52,11 +57,13 @@ class EventProfileUser : Parcelable {
         this.eventImageUrl = eventImageUrl
         this.eventLinkUrl = eventLinkUrl
         this.eventName = eventName
+        this.eventNumberOfSeatsFilled = eventNumberOfSeatsFilled
         this.eventStartDate = eventStartDate
+        this.eventTotalNumberOfSeats = eventTotalNumberOfSeats
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(eventConductedYear)
+        parcel.writeString(eventConductedYear)
         parcel.writeString(eventDescription)
         parcel.writeString(eventEndDate)
         parcel.writeByte(if (eventFlagship) 1 else 0)
@@ -64,7 +71,9 @@ class EventProfileUser : Parcelable {
         parcel.writeString(eventImageUrl)
         parcel.writeString(eventLinkUrl)
         parcel.writeString(eventName)
+        parcel.writeInt(eventNumberOfSeatsFilled)
         parcel.writeString(eventStartDate)
+        parcel.writeInt(eventTotalNumberOfSeats)
     }
 
     override fun describeContents(): Int {

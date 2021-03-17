@@ -1,13 +1,10 @@
 package com.example.swd_application.User.Activities
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
@@ -20,18 +17,20 @@ import com.google.firebase.ktx.Firebase
 
 class EventFullDetailActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         private const val TAG = "EventFullDetail"
         const val FORM_URL = "Form-Url"
     }
 
-    private lateinit var tvEventName:TextView
-    private lateinit var tvEventStartDate:TextView
-    private lateinit var tvEventEndDate:TextView
-    private lateinit var ivEventImage:ImageView
-    private lateinit var tvEventDescription:TextView
-    private lateinit var tvEventHeadOne:TextView
-    private lateinit var tvEventHeadTwo:TextView
+    private lateinit var tvEventName: TextView
+    private lateinit var tvEventStartDate: TextView
+    private lateinit var tvEventEndDate: TextView
+    private lateinit var ivEventImage: ImageView
+    private lateinit var tvEventDescription: TextView
+    private lateinit var tvEventHeadOne: TextView
+    private lateinit var tvEventHeadTwo: TextView
+    private lateinit var tvTotalNumberOfSeats: TextView
+    private lateinit var tvNumberOfSeatsLeft: TextView
 
     private val firestore: FirebaseFirestore = Firebase.firestore
 
@@ -46,30 +45,35 @@ class EventFullDetailActivity : AppCompatActivity() {
         tvEventDescription = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_description_value)
         tvEventHeadOne = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_head_name_1)
         tvEventHeadTwo = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_head_name_2)
+        tvTotalNumberOfSeats = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_total_seats)
+        tvNumberOfSeatsLeft = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_seats_left)
 
-        val eventProfileData: EventProfileUser? = intent.getParcelableExtra<EventProfileUser>(EventBasicDetailsActivity.EVENT_PROFILE_MODEL)
-        if(eventProfileData != null){
+        val eventProfileData: EventProfileUser? =
+            intent.getParcelableExtra<EventProfileUser>(EventBasicDetailsActivity.EVENT_PROFILE_MODEL)
+        if (eventProfileData != null) {
             setEventData(eventProfileData)
         }
     }
-    
-    private fun setEventData(eventProfileNew: EventProfileUser){
-        tvEventName.text = eventProfileNew.eventName
-        tvEventStartDate.text = eventProfileNew.eventStartDate
-        tvEventEndDate.text = eventProfileNew.eventEndDate
-        if(eventProfileNew.eventImageUrl != null) {
-            Log.d(TAG,"${eventProfileNew.eventImageUrl}")
-            setImageView(eventProfileNew.eventImageUrl!!.toUri())
+
+    private fun setEventData(eventProfileUser: EventProfileUser) {
+        tvEventName.text = eventProfileUser.eventName
+        tvEventStartDate.text = eventProfileUser.eventStartDate
+        tvEventEndDate.text = eventProfileUser.eventEndDate
+        if (eventProfileUser.eventImageUrl != null) {
+            Log.d(TAG, "${eventProfileUser.eventImageUrl}")
+            setImageView(eventProfileUser.eventImageUrl!!)
         }
-        tvEventDescription.text = eventProfileNew.eventDescription
-        tvEventHeadOne.text = eventProfileNew.eventHeads.get(0)
-        tvEventHeadTwo.text = eventProfileNew.eventHeads.get(1)
+        tvEventDescription.text = eventProfileUser.eventDescription
+        tvEventHeadOne.text = eventProfileUser.eventHeads.get(0)
+        tvEventHeadTwo.text = eventProfileUser.eventHeads.get(1)
+        tvTotalNumberOfSeats.text = getString(R.string.total_seats_in_event,eventProfileUser.eventTotalNumberOfSeats.toString())
+        val numberOfSeatsLeft: Int = eventProfileUser.eventTotalNumberOfSeats - eventProfileUser.eventNumberOfSeatsFilled
+        tvNumberOfSeatsLeft.text = getString(R.string.seats_left_in_event,numberOfSeatsLeft.toString())
     }
 
-    private fun setImageView(imageUri: Uri){
+    private fun setImageView(imageUrl: String) {
         Glide.with(this)
-            .load(imageUri)
+            .load(imageUrl)
             .into(ivEventImage)
     }
-
 }
