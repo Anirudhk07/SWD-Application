@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.swd_application.Admin.EventAdminActivity
+import com.example.swd_application.Admin.Activities.EventAdminActivity
 import com.example.swd_application.R
 import com.google.firebase.auth.FirebaseAuth
 

@@ -1,4 +1,4 @@
-package com.example.swd_application
+package com.example.swd_application.User.Adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.swd_application.R
 import com.example.swd_application.User.Models.EventModelUser
 import com.example.swd_application.User.Models.EventProfileUser
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter

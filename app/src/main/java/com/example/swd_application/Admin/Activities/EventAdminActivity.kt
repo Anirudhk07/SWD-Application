@@ -1,4 +1,4 @@
-package com.example.swd_application.Admin
+package com.example.swd_application.Admin.Activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.swd_application.Admin.EventModels.*
 import com.example.swd_application.Authentication.Admin.AdminHomeActivity
 import com.example.swd_application.R
-import com.example.swd_application.models.EventModel.EventModel
+import com.example.swd_application.Admin.EventModels.EventModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot

@@ -1,7 +1,4 @@
-package com.example.swd_application.models.EventModel
-
-import com.example.swd_application.Admin.EventModels.EventNonProfile
-import com.example.swd_application.Admin.EventProfile
+package com.example.swd_application.Admin.EventModels
 
 data class EventModel(
     val NonProfile: EventNonProfile,

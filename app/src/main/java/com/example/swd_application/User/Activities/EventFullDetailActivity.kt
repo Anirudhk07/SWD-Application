@@ -32,7 +32,6 @@ class EventFullDetailActivity : AppCompatActivity() {
     private lateinit var tvEventDescription:TextView
     private lateinit var tvEventHeadOne:TextView
     private lateinit var tvEventHeadTwo:TextView
-    private lateinit var tvEventFormLink:TextView
 
     private val firestore: FirebaseFirestore = Firebase.firestore
 
@@ -47,23 +46,10 @@ class EventFullDetailActivity : AppCompatActivity() {
         tvEventDescription = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_description_value)
         tvEventHeadOne = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_head_name_1)
         tvEventHeadTwo = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_head_name_2)
-        tvEventFormLink = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_form_link)
 
         val eventProfileData: EventProfileUser? = intent.getParcelableExtra<EventProfileUser>(EventBasicDetailsActivity.EVENT_PROFILE_MODEL)
         if(eventProfileData != null){
             setEventData(eventProfileData)
-        }
-
-        tvEventFormLink.setOnClickListener {
-
-            val intent = Intent(this, EventFormWebViewActivity::class.java)
-            val eventFormUrl: String? = eventProfileData?.eventLinkUrl
-            if (URLUtil.isValidUrl(eventFormUrl)) {
-                intent.putExtra("url", eventFormUrl)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "Invalid URL!", Toast.LENGTH_SHORT).show()
-            }
         }
     }
     
@@ -78,7 +64,6 @@ class EventFullDetailActivity : AppCompatActivity() {
         tvEventDescription.text = eventProfileNew.eventDescription
         tvEventHeadOne.text = eventProfileNew.eventHeads.get(0)
         tvEventHeadTwo.text = eventProfileNew.eventHeads.get(1)
-        tvEventFormLink.text = eventProfileNew.eventLinkUrl
     }
 
     private fun setImageView(imageUri: Uri){

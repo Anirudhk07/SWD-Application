@@ -1,7 +1,4 @@
-package com.example.swd_application.Admin
-
-import android.os.Parcel
-import android.os.Parcelable
+package com.example.swd_application.Admin.EventModels
 
 data class EventProfile(
     val EventConductedYear:Int,
