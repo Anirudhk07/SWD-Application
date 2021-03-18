@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="total_seats_in_event">Number of total seats are : %s</string>
     <string name="seats_left_in_event">Number of seats left are : %s</string>
+    <string name="event_start_date_and_time">Start Selected Date and Time</string>
+    <string name="event_end_date_and_time">End Selected Date and Time</string>
 </resources>

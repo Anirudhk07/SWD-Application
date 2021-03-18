@@ -1,15 +1,13 @@
 package com.example.swd_application.User.Activities
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.example.swd_application.R
-import com.example.swd_application.User.Models.EventProfileUser
+import com.example.swd_application.Models.EventModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -48,26 +46,26 @@ class EventFullDetailActivity : AppCompatActivity() {
         tvTotalNumberOfSeats = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_total_seats)
         tvNumberOfSeatsLeft = findViewById<TextView>(R.id.tv_activity_event_full_detail_list_event_seats_left)
 
-        val eventProfileData: EventProfileUser? =
-            intent.getParcelableExtra<EventProfileUser>(EventBasicDetailsActivity.EVENT_PROFILE_MODEL)
-        if (eventProfileData != null) {
-            setEventData(eventProfileData)
+        val eventDataModel: EventModel? =
+            intent.getParcelableExtra<EventModel>(EventBasicDetailsActivity.EVENT_PROFILE_MODEL)
+        if (eventDataModel != null) {
+            setEventData(eventDataModel)
         }
     }
 
-    private fun setEventData(eventProfileUser: EventProfileUser) {
-        tvEventName.text = eventProfileUser.eventName
-        tvEventStartDate.text = eventProfileUser.eventStartDate
-        tvEventEndDate.text = eventProfileUser.eventEndDate
-        if (eventProfileUser.eventImageUrl != null) {
-            Log.d(TAG, "${eventProfileUser.eventImageUrl}")
-            setImageView(eventProfileUser.eventImageUrl!!)
+    private fun setEventData(eventModel: EventModel) {
+        tvEventName.text = eventModel.eventName
+        tvEventStartDate.text = eventModel.eventStartDate
+        tvEventEndDate.text = eventModel.eventEndDate
+        if (eventModel.eventImageUrl != null) {
+            Log.d(TAG, "${eventModel.eventImageUrl}")
+            setImageView(eventModel.eventImageUrl!!)
         }
-        tvEventDescription.text = eventProfileUser.eventDescription
-        tvEventHeadOne.text = eventProfileUser.eventHeads.get(0)
-        tvEventHeadTwo.text = eventProfileUser.eventHeads.get(1)
-        tvTotalNumberOfSeats.text = getString(R.string.total_seats_in_event,eventProfileUser.eventTotalNumberOfSeats.toString())
-        val numberOfSeatsLeft: Int = eventProfileUser.eventTotalNumberOfSeats - eventProfileUser.eventNumberOfSeatsFilled
+        tvEventDescription.text = eventModel.eventDescription
+        tvEventHeadOne.text = eventModel.eventHeads.get(0)
+        tvEventHeadTwo.text = eventModel.eventHeads.get(1)
+        tvTotalNumberOfSeats.text = getString(R.string.total_seats_in_event,eventModel.eventTotalNumberOfSeats.toString())
+        val numberOfSeatsLeft: Int = eventModel.eventTotalNumberOfSeats - eventModel.eventNumberOfSeatsFilled
         tvNumberOfSeatsLeft.text = getString(R.string.seats_left_in_event,numberOfSeatsLeft.toString())
     }
 

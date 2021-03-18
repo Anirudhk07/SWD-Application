@@ -9,16 +9,15 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.swd_application.Models.EventModel
 import com.example.swd_application.R
-import com.example.swd_application.User.Models.EventModelUser
-import com.example.swd_application.User.Models.EventProfileUser
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 class EventListAdapter(
     private val onEventClickListener: OnEventClickListener,
-    private val recyclerOptions: FirestoreRecyclerOptions<EventModelUser>
-) : FirestoreRecyclerAdapter<EventModelUser, EventListAdapter.EventViewHolder>(recyclerOptions) {
+    private val recyclerOptions: FirestoreRecyclerOptions<EventModel>
+) : FirestoreRecyclerAdapter<EventModel, EventListAdapter.EventViewHolder>(recyclerOptions) {
 
     companion object {
         private const val TAG = "EventAdapter"
@@ -40,10 +39,8 @@ class EventListAdapter(
 
         init {
             eventName = itemView.findViewById<TextView>(R.id.tv_recycler_event_list_event_name)
-            eventStartDate =
-                itemView.findViewById<TextView>(R.id.tv_recycler_event_list_event_start_date_value)
-            eventEndDate =
-                itemView.findViewById<TextView>(R.id.tv_recycler_event_list_event_end_date_value)
+            eventStartDate = itemView.findViewById<TextView>(R.id.tv_recycler_event_list_event_start_date_value)
+            eventEndDate = itemView.findViewById<TextView>(R.id.tv_recycler_event_list_event_end_date_value)
             eventImage = itemView.findViewById<ImageView>(R.id.iv_recycler_event_list_event_image)
 
             this.onEventClickListener = onEventClickListener
@@ -56,12 +53,12 @@ class EventListAdapter(
             onEventClickListener.onEventClick(adapterPosition)
         }
 
-        fun bindEventData(eventProfileUser: EventProfileUser) {
-            eventName.text = eventProfileUser.eventName
-            eventStartDate.text = eventProfileUser.eventStartDate
-            eventEndDate.text = eventProfileUser.eventEndDate
+        fun bindEventData(eventModel: EventModel) {
+            eventName.text = eventModel.eventName
+            eventStartDate.text = eventModel.eventStartDate
+            eventEndDate.text = eventModel.eventEndDate
 
-            val eventImageUrl: String? = eventProfileUser.eventImageUrl
+            val eventImageUrl: String? = eventModel.eventImageUrl
             if (eventImageUrl != null) {
                 Log.d(TAG, "bindEventData: $eventImageUrl")
                 Log.d(TAG, "itemview context is ${itemView.context}")
@@ -81,11 +78,11 @@ class EventListAdapter(
         return EventViewHolder(itemView, this.onEventClickListener)
     }
 
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int, model: EventModelUser) {
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int, model: EventModel) {
         // TODO("Not yet implemented")
         Log.d("Adapter", "onBindViewHolder() for position $position")
 
-        holder.bindEventData(model.profile)
+        holder.bindEventData(model)
     }
 
     override fun getItemCount(): Int {

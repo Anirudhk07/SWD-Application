@@ -165,7 +165,7 @@
             android:id="@+id/tv_start_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Selected Date and Time"
+            android:text="@string/event_start_date_and_time"
             android:textAllCaps="true"
             android:textSize="20sp"
             android:textAlignment="center"
@@ -181,7 +181,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="End Activity   \nDate"
+                android:text="End Activity  \nDate"
                 android:textSize="20sp"
                 android:textAllCaps="true"
                 android:layout_weight="1" />
@@ -200,7 +200,7 @@
             android:id="@+id/tv_end_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="End Selected Date and Time"
+            android:text="@string/event_end_date_and_time"
             android:textAllCaps="true"
             android:textSize="20sp"
             android:textAlignment="center"
