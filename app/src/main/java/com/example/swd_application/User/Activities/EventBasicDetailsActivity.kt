@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.swd_application.EventListAdapter
+import com.example.swd_application.User.Adapters.EventListAdapter
 import com.example.swd_application.R
 import com.example.swd_application.User.Models.EventModelUser
 import com.firebase.ui.firestore.FirestoreRecyclerOptions

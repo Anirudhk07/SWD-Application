@@ -5,11 +5,15 @@ class EventNonProfileUser {
     lateinit var eventHeadsDetails: List<EventHeadDetailsUser>
     lateinit var eventVolunteersDetails: List<EventVolunteerDetailsUser>
 
-    constructor(){
+    constructor() {
 
     }
 
-    constructor(eventCoordinatorsDetails: List<EventCoordinatorDetailsUser>, eventHeadsDetails: List<EventHeadDetailsUser>, eventVolunteersDetails: List<EventVolunteerDetailsUser>):this(){
+    constructor(
+        eventCoordinatorsDetails: List<EventCoordinatorDetailsUser>,
+        eventHeadsDetails: List<EventHeadDetailsUser>,
+        eventVolunteersDetails: List<EventVolunteerDetailsUser>
+    ) : this() {
         this.eventCoordinatorsDetails = eventCoordinatorsDetails
         this.eventHeadsDetails = eventHeadsDetails
         this.eventVolunteersDetails = eventVolunteersDetails
@@ -26,19 +30,21 @@ class EventCoordinatorDetailsUser {
     lateinit var coordinatorLastName: String
     lateinit var coordinatorYear: String
 
-    constructor(){
+    // Required for Firebase
+    constructor() {
 
     }
 
-    constructor(coordinatorBranch: String,
-                coordinatorCollegeEmailId: String,
-                coordinatorContactNo: String,
-                coordinatorFirstName: String,
-                coordinatorGrNo: String,
-                coordinatorId: String,
-                coordinatorLastName: String,
-                coordinatorYear: String):this(){
-
+    constructor(
+        coordinatorBranch: String,
+        coordinatorCollegeEmailId: String,
+        coordinatorContactNo: String,
+        coordinatorFirstName: String,
+        coordinatorGrNo: String,
+        coordinatorId: String,
+        coordinatorLastName: String,
+        coordinatorYear: String
+    ) : this() {
         this.coordinatorBranch = coordinatorBranch
         this.coordinatorCollegeEmailId = coordinatorCollegeEmailId
         this.coordinatorContactNo = coordinatorContactNo
@@ -60,19 +66,21 @@ class EventHeadDetailsUser {
     lateinit var headLastName: String
     lateinit var headYear: String
 
-    constructor(){
+    // Required for Firebase
+    constructor() {
 
     }
 
-    constructor(headBranch: String,
-                headCollegeEmailId: String,
-                headContactNo: String,
-                headFirstName: String,
-                headGrNo: String,
-                headId: String,
-                headLastName: String,
-                headYear: String):this(){
-
+    constructor(
+        headBranch: String,
+        headCollegeEmailId: String,
+        headContactNo: String,
+        headFirstName: String,
+        headGrNo: String,
+        headId: String,
+        headLastName: String,
+        headYear: String
+    ) : this() {
         this.headBranch = headBranch
         this.headCollegeEmailId = headCollegeEmailId
         this.headContactNo = headContactNo
@@ -94,19 +102,21 @@ class EventVolunteerDetailsUser {
     lateinit var volunteerLastName: String
     lateinit var volunteerYear: String
 
-    constructor(){
+    // Required for Firebase
+    constructor() {
 
     }
 
-    constructor(volunteerBranch: String,
-                volunteerCollegeEmailId: String,
-                volunteerContactNo: String,
-                volunteerFirstName: String,
-                volunteerGrNo: String,
-                volunteerId: String,
-                volunteerLastName: String,
-                volunteerYear: String):this(){
-
+    constructor(
+        volunteerBranch: String,
+        volunteerCollegeEmailId: String,
+        volunteerContactNo: String,
+        volunteerFirstName: String,
+        volunteerGrNo: String,
+        volunteerId: String,
+        volunteerLastName: String,
+        volunteerYear: String
+    ) : this() {
         this.volunteerBranch = volunteerBranch
         this.volunteerCollegeEmailId = volunteerCollegeEmailId
         this.volunteerContactNo = volunteerContactNo

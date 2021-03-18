@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tv_activity_event_full_detail_list_event_name"
@@ -146,45 +146,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="200dp"
             android:text="Head-2"
             android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_activity_event_full_detail_list_event_head_name_1"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tv_activity_event_full_detail_list_event_head_name_1"
             app:layout_constraintTop_toBottomOf="@+id/tv_activity_event_full_detail_list_event_head_name_1" />
 
         <TextView
-            android:id="@+id/tv_activity_event_full_detail_list_event_form"
+            android:id="@+id/tv_activity_event_full_detail_list_total_seats"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginHorizontal="20dp"
-            android:text="Google-Form Link For Event is Below"
-            android:textAlignment="textStart"
+            android:layout_marginEnd="20dp"
+            android:text="@string/total_seats_in_event"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_activity_event_full_detail_list_event_heads"
+            app:layout_constraintTop_toBottomOf="@+id/tv_activity_event_full_detail_list_event_head_name_2" />
+
+        <TextView
+            android:id="@+id/tv_activity_event_full_detail_list_event_seats_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/seats_left_in_event"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_activity_event_full_detail_list_total_seats"
+            app:layout_constraintTop_toBottomOf="@+id/tv_activity_event_full_detail_list_total_seats" />
+
+        <Button
+            android:id="@+id/btn_activity_event_full_detail_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:text="Register"
+            android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_activity_event_full_detail_list_event_head_name_2"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/tv_activity_event_full_detail_list_event_form_link"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
-            android:text="Google-Form Link For Event is Here"
-            android:textAlignment="textStart"
-            android:textSize="20sp"
-            android:textColor="#0000EE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_activity_event_full_detail_list_event_form"
-            app:layout_constraintStart_toStartOf="@+id/tv_activity_event_full_detail_list_event_form"
-            app:layout_constraintTop_toBottomOf="@+id/tv_activity_event_full_detail_list_event_form" />
-
-
-
+            app:layout_constraintTop_toBottomOf="@+id/tv_activity_event_full_detail_list_event_seats_left" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

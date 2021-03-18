@@ -1,9 +1,9 @@
 package com.example.swd_application.Admin.EventModels
 
 data class EventNonProfile(
-    val EventCoordinatorsDetails:List<EventCoordinatorDetails>,
-    val EventHeadsDetails:List<EventHeadDetails>,
-    val EventVolunteersDetails:List<EventVolunteerDetails>
+    val EventCoordinatorsDetails: List<EventCoordinatorDetails>,
+    val EventHeadsDetails: List<EventHeadDetails>,
+    val EventVolunteersDetails: List<EventVolunteerDetails>
 )
 
 data class EventCoordinatorDetails(

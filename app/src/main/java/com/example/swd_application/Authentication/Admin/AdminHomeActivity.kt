@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.swd_application.Admin.EventAdminActivity
+import com.example.swd_application.Admin.Activities.EventAdminActivity
 import com.example.swd_application.R
 
 class AdminHomeActivity : AppCompatActivity() {

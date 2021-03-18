@@ -5,16 +5,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".User.Activities.EventFormWebViewActivity"></activity>
+        <activity android:name=".User.Activities.EventFormWebViewActivity" />
         <activity android:name=".User.Activities.EventFullDetailActivity" />
-        <activity android:name=".User.Activities.EventBasicDetailsActivity"></activity>
-        <activity android:name=".Admin.EventAdminActivity" />
+        <activity android:name=".User.Activities.EventBasicDetailsActivity" />
+        <activity android:name=".Admin.Activities.EventAdminActivity" />
         <activity android:name=".Authentication.Client.ProfileActivity" />
         <activity android:name=".Authentication.Admin.AdminHomeActivity" />
         <activity android:name=".Authentication.Admin.AdminLoginActivity" />
