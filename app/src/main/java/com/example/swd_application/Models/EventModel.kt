@@ -1,10 +1,9 @@
-package com.example.swd_application.User.Models
+package com.example.swd_application.Models
 
 import android.os.Parcel
 import android.os.Parcelable
 
-
-class EventProfileUser : Parcelable {
+class EventModel : Parcelable {
     lateinit var eventConductedYear: String
     lateinit var eventDescription: String
     lateinit var eventEndDate: String
@@ -80,12 +79,12 @@ class EventProfileUser : Parcelable {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<EventProfileUser> {
-        override fun createFromParcel(parcel: Parcel): EventProfileUser {
-            return EventProfileUser(parcel)
+    companion object CREATOR : Parcelable.Creator<EventModel> {
+        override fun createFromParcel(parcel: Parcel): EventModel {
+            return EventModel(parcel)
         }
 
-        override fun newArray(size: Int): Array<EventProfileUser?> {
+        override fun newArray(size: Int): Array<EventModel?> {
             return arrayOfNulls(size)
         }
     }

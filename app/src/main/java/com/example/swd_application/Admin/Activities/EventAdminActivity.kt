@@ -8,10 +8,9 @@ import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.swd_application.Admin.EventModels.*
 import com.example.swd_application.Authentication.Admin.AdminHomeActivity
 import com.example.swd_application.R
-import com.example.swd_application.Admin.EventModels.EventModel
+import com.example.swd_application.Models.EventModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -23,7 +22,6 @@ import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import java.util.*
 
-
 class EventAdminActivity : AppCompatActivity() {
 
     companion object {
@@ -32,7 +30,7 @@ class EventAdminActivity : AppCompatActivity() {
 
         const val COLLECTION_PATH = "EVENTS"
         const val ROOT_EVENT_IMAGE_REF = "Events-Images"
-        const val IMAGE_URL_FIELD = "profile.eventImageUrl"
+        const val IMAGE_URL_FIELD = "eventImageUrl"
     }
 
     private lateinit var et_admin_event_name: TextView
@@ -66,7 +64,6 @@ class EventAdminActivity : AppCompatActivity() {
     private val eventsDb: FirebaseFirestore = Firebase.firestore
     private val storageReference: FirebaseStorage = Firebase.storage
     private val imageStorageRootRef: StorageReference = storageReference.reference
-    private val rootEventImageRef: StorageReference = imageStorageRootRef.child(ROOT_EVENT_IMAGE_REF)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,39 +140,19 @@ class EventAdminActivity : AppCompatActivity() {
 
         btn_add_event.setOnClickListener {
 
-            val eventModel: EventModel = createEventModel()
-            Log.d(TAG, "Show Data $eventModel")
-
-            if(eventModel.Profile.EventName.isEmpty() || eventModel.Profile.EventName.isBlank()){
-                Toast.makeText(this@EventAdminActivity,"You have not provided an event name.So provide event name to proceed",Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }else if(eventModel.Profile.EventDescription.isEmpty() || eventModel.Profile.EventDescription.isBlank()){
-                Toast.makeText(this@EventAdminActivity,"You have not provided an event description.So provide an event description to proceed",Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }else if (imageUri == null) {
-                Toast.makeText(this@EventAdminActivity,"You have not provided an event image.So provide an event image to proceed",Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }else if(eventModel.Profile.EventStartDate == null){
-                Toast.makeText(this@EventAdminActivity,"You have not provided an event start date.So provide an event start date to proceed",Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }else if(eventModel.Profile.EventEndDate == null){
-                Toast.makeText(this@EventAdminActivity,"You have not provided an event end date.So provide an event end date to proceed",Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }else if(eventModel.Profile.EventLinkUrl.isBlank() || eventModel.Profile.EventLinkUrl.isEmpty()) {
-                Toast.makeText(this@EventAdminActivity,"You have not provided an event form link.So provide an event form link to proceed",Toast.LENGTH_SHORT).show()
+            val areAllFieldsFilled:Boolean = checkWhetherAllFieldsFilled()
+            // If all the fields are not filled
+            if(!areAllFieldsFilled){
                 return@setOnClickListener
             }
+
+            val eventModel: EventModel = createEventModel()
+            Log.d(TAG, "Show Data $eventModel")
 
             // This function will check firestore and if event exists it does not allow user to post event
             // but if event does not exist it add the events to firestore
             checkWhetherThisEventExistsInFireStore(eventModel)
         }
-    }
-
-    private fun launchGallery() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_PICK_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -190,47 +167,13 @@ class EventAdminActivity : AppCompatActivity() {
         }
     }
 
-    // It is used to create eventModel datatype from data provided by user
-    private fun createEventModel(): EventModel {
+    private fun uploadImageToFirebaseStorage(eventId: String) {
 
-        val eventNonProfile: EventNonProfile = EventNonProfile(
-            EventCoordinatorsDetails = listOf<EventCoordinatorDetails>(),
-            EventHeadsDetails = listOf<EventHeadDetails>(),
-            EventVolunteersDetails = listOf<EventVolunteerDetails>()
+        val eventImageRef: StorageReference = imageStorageRootRef.child(
+            "${ROOT_EVENT_IMAGE_REF}/${eventId}.${
+                getFileExtension(imageUri!!)
+            }"
         )
-
-        val calender: Calendar = Calendar.getInstance()
-        val year: Int = calender.get(Calendar.YEAR)
-        val eventProfile: EventProfile = EventProfile(
-            EventConductedYear = year.toString(),
-            EventDescription = et_admin_event_description.text.toString(),
-            EventEndDate = endDate,
-            EventFlagship = isEventFlagship,
-            EventHeads = listOf<String>(
-                et_event_name_head_1.text.toString(),
-                et_event_name_head_2.text.toString()
-            ),
-            EventImageUrl = null,
-            EventLinkUrl = et_event_link.text.toString(),
-            EventName = et_admin_event_name.text.toString().trim().toUpperCase(Locale.ROOT),
-            EventTotalNumberOfSeats = et_event_number_of_seats_value.text.toString().toInt(),
-            EventNumberOfSeatsFilled = 0,
-            EventStartDate = startDate
-        )
-
-        val eventModel = EventModel(eventNonProfile, eventProfile)
-        return eventModel
-    }
-
-    private fun getFileExtension(uri: Uri): String {
-        val contentResolver = contentResolver
-        val mimeType = MimeTypeMap.getSingleton()
-        return mimeType.getExtensionFromMimeType(contentResolver.getType(uri)).toString()
-    }
-    
-    private fun uploadImageToFirebaseStorage(eventId:String) {
-
-        val eventImageRef: StorageReference = imageStorageRootRef.child("${ROOT_EVENT_IMAGE_REF}/${eventId}.${getFileExtension(imageUri!!)}")
 
         val path: String = eventImageRef.path
         val imageName: String = eventImageRef.name
@@ -263,29 +206,27 @@ class EventAdminActivity : AppCompatActivity() {
                 val downloadUri: Uri? = task.result
                 if (downloadUri != null) {
                     // We are here updating the event
-                    updateEventDataWithImageUrl(eventId, IMAGE_URL_FIELD,downloadUri)
+                    updateEventDataWithImageUrl(eventId, IMAGE_URL_FIELD, downloadUri)
                 }
             }
         }
     }
 
-    private fun updateEventDataWithImageUrl(eventId: String,fieldName:String,downloadUri:Uri){
+    private fun updateEventDataWithImageUrl(eventId: String, fieldName: String, downloadUri: Uri) {
         eventsDb.collection(COLLECTION_PATH).document(eventId)
             .update(mapOf(fieldName to downloadUri.toString()))
             .addOnSuccessListener {
-                Log.d(
-                    TAG,
-                    "DocumentSnapshot successfully updated! path name is ${downloadUri} and "
-                )
+                Log.d(TAG, "DocumentSnapshot successfully updated! path name is ${downloadUri}")
             }
-            .addOnFailureListener { ex -> Log.w(TAG, "Error updating document", ex) }
+            .addOnFailureListener { ex ->
+                Log.w(TAG, "Error updating document", ex)
+            }
     }
 
     // This functions adds the event data to firestore
     private fun addEventDataToFirestore(eventModel: EventModel) {
 
-        val eventId =
-            "${eventModel.Profile.EventName.toUpperCase(Locale.ROOT)}-${eventModel.Profile.EventConductedYear}"
+        val eventId = "${eventModel.eventName.toUpperCase(Locale.ROOT)}-${eventModel.eventConductedYear}"
         eventsDb.collection(COLLECTION_PATH)
             .document(eventId)
             .set(eventModel)
@@ -295,6 +236,11 @@ class EventAdminActivity : AppCompatActivity() {
                     "The Event Data Got Uploaded",
                     Toast.LENGTH_LONG
                 ).show()
+
+                // To add data into sub collections of the particular event document use below lines
+                // eventsDb.collection(COLLECTION_PATH).document(eventId).collection("COORDINATORS")
+                // eventsDb.collection(COLLECTION_PATH).document(eventId).collection("HEADS")
+                // eventsDb.collection(COLLECTION_PATH).document(eventId).collection("VOLUNTEERS").add(mapOf("hello" to "Anubhav"))
 
                 val intent = Intent(this@EventAdminActivity, AdminHomeActivity::class.java)
                 startActivity(intent)
@@ -314,7 +260,7 @@ class EventAdminActivity : AppCompatActivity() {
     // Then it uploads the image and the update the event data with image Url
     private fun checkWhetherThisEventExistsInFireStore(eventModel: EventModel) {
 
-        val eventId = "${eventModel.Profile.EventName.toUpperCase(Locale.ROOT)}-${eventModel.Profile.EventConductedYear}"
+        val eventId = "${eventModel.eventName.toUpperCase(Locale.ROOT)}-${eventModel.eventConductedYear}"
 
         eventsDb.collection(COLLECTION_PATH)
             .get()
@@ -322,11 +268,7 @@ class EventAdminActivity : AppCompatActivity() {
                 for (document in documents) {
                     Log.d(TAG, "DocumentSnapshot id: ${document.id}")
                     if (document.id == eventId) {
-                        Toast.makeText(
-                            this@EventAdminActivity,
-                            "This event already exists in database",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@EventAdminActivity,"This event already exists in database",Toast.LENGTH_LONG).show()
                         return@addOnSuccessListener
                     }
                 }
@@ -341,4 +283,68 @@ class EventAdminActivity : AppCompatActivity() {
             }
     }
 
+    private fun launchGallery() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    private fun getFileExtension(uri: Uri): String {
+        val contentResolver = contentResolver
+        val mimeType = MimeTypeMap.getSingleton()
+        return mimeType.getExtensionFromMimeType(contentResolver.getType(uri)).toString()
+    }
+
+    // It is used to create eventModel datatype from data provided by user
+    private fun createEventModel(): EventModel {
+
+        val calender: Calendar = Calendar.getInstance()
+        val year: Int = calender.get(Calendar.YEAR)
+        val eventModel: EventModel = EventModel(
+            year.toString(),
+            et_admin_event_description.text.toString(),
+            endDate!!,
+            isEventFlagship,
+            listOf<String>(
+                et_event_name_head_1.text.toString(),
+                et_event_name_head_2.text.toString()
+            ),
+            null,
+            et_event_link.text.toString(),
+            et_admin_event_name.text.toString().trim().toUpperCase(Locale.ROOT),
+            0,
+            startDate!!,
+            et_event_number_of_seats_value.text.toString().toInt()
+        )
+
+        return eventModel
+    }
+
+    private fun checkWhetherAllFieldsFilled(): Boolean{
+        if (et_admin_event_name.text.isEmpty() || et_admin_event_name.text.isBlank()) {
+            Toast.makeText(this@EventAdminActivity, "You have not provided an event name.So provide event name to proceed", Toast.LENGTH_SHORT).show()
+            return false
+        } else if (et_admin_event_description.text.isEmpty() || et_admin_event_description.text.isBlank()) {
+            Toast.makeText(this@EventAdminActivity,"You have not provided an event description.So provide an event description to proceed",Toast.LENGTH_SHORT).show()
+            return false
+        } else if (imageUri == null) {
+            Toast.makeText(this@EventAdminActivity,"You have not provided an event image.So provide an event image to proceed", Toast.LENGTH_SHORT).show()
+            return false
+        } else if (et_event_number_of_seats_value.text.isEmpty() || et_event_number_of_seats_value.text.isBlank()) {
+            Toast.makeText(this@EventAdminActivity,"You have not provided the number of seats for an event.So provide the number of seats for event to proceed",Toast.LENGTH_SHORT).show()
+            return false
+        } else if (tv_start_event.text == getString(R.string.event_start_date_and_time)) {
+            Toast.makeText(this@EventAdminActivity,"You have not provided an event start date.So provide an event start date to proceed", Toast.LENGTH_SHORT).show()
+            return false
+        } else if (tv_end_event.text == getString(R.string.event_end_date_and_time)) {
+            Toast.makeText(this@EventAdminActivity,"You have not provided an event end date.So provide an event end date to proceed",Toast.LENGTH_SHORT).show()
+            return false
+        } else if (et_event_link.text.isEmpty() || et_event_link.text.isBlank()) {
+            Toast.makeText(this@EventAdminActivity,"You have not provided an event form link.So provide an event form link to proceed",Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+    }
 }
+

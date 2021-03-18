@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swd_application.Models.EventModel
 import com.example.swd_application.User.Adapters.EventListAdapter
 import com.example.swd_application.R
-import com.example.swd_application.User.Models.EventModelUser
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -39,8 +39,8 @@ class EventBasicDetailsActivity : AppCompatActivity(), EventListAdapter.OnEventC
 
         Log.d(TAG,"This is ${query}")
 
-        val options: FirestoreRecyclerOptions<EventModelUser> = FirestoreRecyclerOptions.Builder<EventModelUser>()
-            .setQuery(query, EventModelUser::class.java)
+        val options: FirestoreRecyclerOptions<EventModel> = FirestoreRecyclerOptions.Builder<EventModel>()
+            .setQuery(query, EventModel::class.java)
             .build()
 
         Log.d(TAG,"These are some events ${options.snapshots}")
@@ -51,12 +51,12 @@ class EventBasicDetailsActivity : AppCompatActivity(), EventListAdapter.OnEventC
     }
 
     override fun onEventClick(position: Int) {
-        Log.d(TAG,"This is ${adapter.getItem(position).profile}")
+        Log.d(TAG,"This is ${adapter.getItem(position)}")
         Toast.makeText(this,"This is ${position}",Toast.LENGTH_SHORT).show()
 
-        val eventProfileData = adapter.getItem(position).profile
+        val eventData = adapter.getItem(position)
         val intent = Intent(this,EventFullDetailActivity::class.java)
-        intent.putExtra(EVENT_PROFILE_MODEL,eventProfileData)
+        intent.putExtra(EVENT_PROFILE_MODEL,eventData)
         startActivity(intent)
     }
 
