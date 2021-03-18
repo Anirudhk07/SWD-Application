@@ -10,6 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".User.Activities.LoginActivity"></activity>
+        <activity android:name=".User.Activities.RegisterActivity" />
         <activity android:name=".User.Activities.EventFormWebViewActivity" />
         <activity android:name=".User.Activities.EventFullDetailActivity" />
         <activity android:name=".User.Activities.EventBasicDetailsActivity" />
