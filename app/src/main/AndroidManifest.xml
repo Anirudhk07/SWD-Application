@@ -11,7 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".User.Activities.LoginActivity" />
-        <activity android:name=".User.Activities.RegisterActivity" />
+        <activity android:name=".User.Activities.RegisterActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".User.Activities.EventFormWebViewActivity" />
         <activity android:name=".User.Activities.EventFullDetailActivity" />
         <activity android:name=".User.Activities.EventBasicDetailsActivity" />
@@ -21,11 +27,7 @@
         <activity android:name=".Authentication.Admin.AdminLoginActivity" />
         <activity android:name=".Authentication.Client.HomeActivity" />
         <activity android:name=".Authentication.Client.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

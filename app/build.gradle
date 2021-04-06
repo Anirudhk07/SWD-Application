@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.swd_application"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -82,6 +82,9 @@ dependencies {
 
     // Declared the dependency for the Cloud Storage library
     implementation 'com.google.firebase:firebase-storage-ktx'
+
+    // Cryptography Library
+    implementation 'com.github.ihimanshurawat:Hasher:1.2'
 
     // These are the dependencies for android testing libraries
     testImplementation 'junit:junit:4.13.2'

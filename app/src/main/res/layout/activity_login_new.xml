@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper"
     android:orientation="vertical"
-    tools:context=".User.Activities.RegisterActivity">
+    tools:context=".User.Activities.LoginActivity">
 
     <TextView
         android:id="@+id/tv_application_name"
@@ -33,7 +33,23 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/et_parent_register_vit_email"
+                android:id="@+id/et_login_gr_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/black"
+                android:ems="10"
+                android:hint="GR Number"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_login_vit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -49,7 +65,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/et_register_password"
+                android:id="@+id/et_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -65,7 +81,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/btn_parent_register_register"
+                android:id="@+id/btn_login_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -76,7 +92,7 @@
                 android:textSize="13sp" />
 
             <Button
-                android:id="@+id/btn_parent_register_login"
+                android:id="@+id/btn_login_action"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
