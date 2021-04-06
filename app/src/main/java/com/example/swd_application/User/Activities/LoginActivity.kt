@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.swd_application.Authentication.Client.ProfileActivity
 import com.example.swd_application.Models.StudentRegistrationModel
 import com.example.swd_application.R
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -23,13 +25,16 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "LoginActivity"
         private const val STUDENT_REGISTRATION_COLLECTION = "STUDENT_REGISTRATION"
+        private const val STUDENT_GR_NUMBER = "studentGrNo"
+        private const val APP_SHARED_PREFERENCES = "APP-PREFERENCES"
     }
 
     private val firestore: FirebaseFirestore = Firebase.firestore
+    private val studentRegistrationCollection: CollectionReference = firestore.collection(STUDENT_REGISTRATION_COLLECTION)
 
-    private lateinit var grNumber: EditText
-    private lateinit var vitEmail: EditText
-    private lateinit var password: EditText
+    private lateinit var etGrNumber: EditText
+    private lateinit var etVitEmail: EditText
+    private lateinit var etPassword: EditText
 
     private lateinit var btnRegister: Button
     private lateinit var btnLogin: Button
@@ -38,9 +43,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_new)
 
-        grNumber = findViewById<EditText>(R.id.et_login_gr_number)
-        vitEmail = findViewById<EditText>(R.id.et_login_vit_email)
-        password = findViewById<EditText>(R.id.et_login_password)
+        etGrNumber = findViewById(R.id.et_login_gr_number)
+        etVitEmail = findViewById(R.id.et_login_vit_email)
+        etPassword = findViewById(R.id.et_login_password)
 
         btnRegister = findViewById(R.id.btn_login_register)
         btnLogin = findViewById(R.id.btn_login_action)
@@ -57,26 +62,31 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val grNumber = grNumber.text.toString().trim()
-            val email = vitEmail.text.toString().trim().toLowerCase(Locale.ROOT)
-            val password = Hasher.hash(password.text.toString().trim(), HashType.SHA_256)
+            val grNumber = etGrNumber.text.toString().trim()
+            val email = etVitEmail.text.toString().trim().toLowerCase(Locale.ROOT)
+            val password = Hasher.hash(etPassword.text.toString().trim(), HashType.SHA_256)
 
             checkWhetherStudentIsAlreadyRegistered(grNumber, email, password)
+
+            // Just for demonstration purpose
+            // val preferences = getSharedPreferences (APP_SHARED_PREFERENCES, MODE_PRIVATE);
+            // val id = preferences.getString (STUDENT_GR_NUMBER, "null");
+            // Log.d(TAG, "onCreate: " + id);
         }
     }
 
     private fun checkWhetherStudentIsAlreadyRegistered(studentGrNo: String, email: String, password: String) {
-        firestore.collection(STUDENT_REGISTRATION_COLLECTION)
+        studentRegistrationCollection
             .document(studentGrNo)
             .get()
             .addOnCompleteListener { task ->
-                if(task.isSuccessful){
+                if (task.isSuccessful) {
                     val document: DocumentSnapshot? = task.result
-                    if(document != null && document.exists()){
+                    if (document != null && document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.data)
 
                         val studentRegistrationModel = document.toObject(StudentRegistrationModel::class.java)
-                        if(studentRegistrationModel != null){
+                        if (studentRegistrationModel != null) {
                             if (email != studentRegistrationModel.studentCollegeEmailId) {
                                 Toast.makeText(this@LoginActivity, "You have entered the wrong email.Please enter the correct email.", Toast.LENGTH_SHORT).show()
                                 return@addOnCompleteListener
@@ -87,34 +97,37 @@ class LoginActivity : AppCompatActivity() {
                                 return@addOnCompleteListener
                             }
 
-                            Toast.makeText(this@LoginActivity,"Getting you logged in inside the app.",Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginActivity,EventBasicDetailsActivity::class.java))
+                            val preferences = getSharedPreferences(APP_SHARED_PREFERENCES, MODE_PRIVATE)
+                            preferences.edit().putString(STUDENT_GR_NUMBER, studentRegistrationModel.studentGrNo).apply()
+
+                            Toast.makeText(this@LoginActivity, "Getting you logged in inside the app.", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
                         }
                     } else {
-                        Log.d(TAG, "No such document");
-                        Toast.makeText(this@LoginActivity, "Your student account doesn't exist.Please get yourself registered on the app.", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "No such document")
+                        Toast.makeText(this@LoginActivity, "Your student account doesn't exist.Please get yourself registered on the app.", Toast.LENGTH_SHORT).show()
                     }
-                } else{
-                    Log.d(TAG, "get failed with ", task.getException());
-                    Toast.makeText(this@LoginActivity, "There was some issue while login.So please try to login again.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "get failed with ", task.exception)
+                    Toast.makeText(this@LoginActivity, "There was some issue while login.So please try to login again.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     private fun checkWhetherAllFieldsAreFilled(): Boolean {
-        if (grNumber.text.toString().isEmpty() || grNumber.text.toString().isBlank()) {
+        if (etGrNumber.text.toString().isEmpty() || etGrNumber.text.toString().isBlank()) {
             Toast.makeText(this@LoginActivity, "Your gr number field is empty.Please enter gr number to proceed.", Toast.LENGTH_SHORT).show()
             return false
         }
-        if (vitEmail.text.toString().isEmpty() || vitEmail.text.toString().isBlank()) {
+        if (etVitEmail.text.toString().isEmpty() || etVitEmail.text.toString().isBlank()) {
             Toast.makeText(this@LoginActivity, "Your vit email address field is empty.Please enter vit email address to proceed.", Toast.LENGTH_SHORT).show()
             return false
         }
-        if (!isEmailValid(vitEmail.text.toString())) {
+        if (!isEmailValid(etVitEmail.text.toString())) {
             Toast.makeText(this@LoginActivity, "You have entered an invalid vit email address", Toast.LENGTH_SHORT).show()
             return false
         }
-        if (password.text.toString().isEmpty() || password.text.toString().isBlank()) {
+        if (etPassword.text.toString().isEmpty() || etPassword.text.toString().isBlank()) {
             Toast.makeText(this@LoginActivity, "Your password field is empty.Please enter password to proceed.", Toast.LENGTH_SHORT).show()
             return false
         }

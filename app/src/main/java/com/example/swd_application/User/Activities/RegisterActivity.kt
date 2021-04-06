@@ -66,15 +66,15 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        etFirstName = findViewById<EditText>(R.id.et_register_firstname)
-        etLastName = findViewById<EditText>(R.id.et_register_lastname)
-        etGrNumber = findViewById<EditText>(R.id.et_register_gr_number)
-        etDepartment = findViewById<EditText>(R.id.et_register_department)
-        ivStudentImageProfile = findViewById<ImageView>(R.id.iv_register_student_profile_image)
-        btnChoose = findViewById<Button>(R.id.btn_register_choose_image)
-        etVitEmail = findViewById<EditText>(R.id.et_register_vit_email)
-        etPassword = findViewById<EditText>(R.id.et_register_password)
-        etConfirmPassword = findViewById<EditText>(R.id.et_register_confirm_password)
+        etFirstName = findViewById(R.id.et_register_firstname)
+        etLastName = findViewById(R.id.et_register_lastname)
+        etGrNumber = findViewById(R.id.et_register_gr_number)
+        etDepartment = findViewById(R.id.et_register_department)
+        ivStudentImageProfile = findViewById(R.id.iv_register_student_profile_image)
+        btnChoose = findViewById(R.id.btn_register_choose_image)
+        etVitEmail = findViewById(R.id.et_register_vit_email)
+        etPassword = findViewById(R.id.et_register_password)
+        etConfirmPassword = findViewById(R.id.et_register_confirm_password)
 
         btnRegister = findViewById(R.id.btn_register_register)
         btnLogin = findViewById(R.id.btn_register_login)
@@ -123,14 +123,14 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     if (task.result != null) {
                         for (document: QueryDocumentSnapshot in task.result!!) {
-                            Log.d(TAG, document.getId() + " => " + document.getData());
+                            Log.d(TAG, document.id + " => " + document.data)
 
-                            val student = document.toObject<StudentRegistrationModel>(StudentRegistrationModel::class.java)
+                            val student = document.toObject(StudentRegistrationModel::class.java)
 
-                            Log.d(TAG, "checkWhetherStudentIsAlreadyRegistered: ${studentRegistrationModel.studentGrNo.equals(student.studentGrNo)}")
+                            Log.d(TAG, "checkWhetherStudentIsAlreadyRegistered: ${studentRegistrationModel.studentGrNo == student.studentGrNo}")
 
                             if (studentRegistrationModel.studentGrNo == student.studentGrNo) {
-                                Toast.makeText(this@RegisterActivity, "Your account already exists.Please try to login with the your registered account.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this@RegisterActivity, "Your account already exists.Please try to login with the your registered account.", Toast.LENGTH_SHORT).show()
                                 return@addOnCompleteListener
                             }
                         }
@@ -140,8 +140,8 @@ class RegisterActivity : AppCompatActivity() {
 
                     uploadImageToFirebaseStorage(studentRegistrationModel.studentGrNo)
                 } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                    Toast.makeText(this@RegisterActivity, "There was problem occurred in getting you registered.So Please Try Again.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Error getting documents: ", task.exception)
+                    Toast.makeText(this@RegisterActivity, "There was problem occurred in getting you registered.So Please Try Again.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -195,7 +195,7 @@ class RegisterActivity : AppCompatActivity() {
             .document(studentGrNo)
             .update(mapOf(fieldName to downloadUri.toString()))
             .addOnSuccessListener {
-                Log.d(TAG, "DocumentSnapshot successfully updated! path name is ${downloadUri}")
+                Log.d(TAG, "DocumentSnapshot successfully updated! path name is $downloadUri")
             }
             .addOnFailureListener { ex ->
                 Log.w(TAG, "Error updating document", ex)
